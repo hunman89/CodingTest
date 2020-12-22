@@ -1,10 +1,7 @@
-class Solution:
-    def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
-        maxcandy = max(candies)
-        canGreatest = []
-        for i in range(len(candies)):
-            if candies[i] + extraCandies >= maxcandy:
-                canGreatest.append(True)
-            else:
-                canGreatest.append(False)
-        return canGreatest
+import re
+list = []
+s = "A man, a plan, a canal: Panama"
+s = s.lower()
+s = re.sub('[^0-9a-z]','',s)
+
+print(s == s[::-1])
