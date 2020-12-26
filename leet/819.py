@@ -14,5 +14,4 @@ counts = collections.Counter(texts)
 # 빈도수를 세어주는 객체
 most = counts.most_common(1)
 # 빈도수가 높은 것들중 1번째
-print (most[0][0])
- # 그것의 이름
+print(most[0][0]) # 그것의 이름
