@@ -32,5 +32,3 @@ for i in range(len(nums)-2):
       left += 1
       right -= 1
 print(result)
-
-
