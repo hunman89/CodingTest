@@ -12,4 +12,3 @@ def oddEvenList(self, head: ListNode) -> ListNode:
         odd, even = odd.next, even.next
     odd.next = even_head
     return head
-
