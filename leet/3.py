@@ -5,7 +5,7 @@ used = {}
 max_length = start = 0
 # index는 계속 진행하는 포인터, start는 글자 길이의 시작점
 for index, char in enumerate(s):
-  if char in used:
+  if char in used and start <= used[char]:
     # 한번 나왔던 문자이면, 전에 나왔던 부분에서 + 1 문자부터 시작!
     start = used[char] + 1
   else:
