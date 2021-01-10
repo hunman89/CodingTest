@@ -6,7 +6,6 @@ route = [[1,2,1], [1,3,4], [2,3,2]]
 
 def solution(route):
     result = []
-    
     graph = collections.defaultdict(list)
     for u, v, w in route:
         graph[u].append((v, w))
