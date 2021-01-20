@@ -1,145 +1,43 @@
-from itertools import permutations
+def get_strikes_or_ball(user_input_number, random_number):
+    # '''
+    # Input:
+    #   - user_input_number : 문자열값으로 사용자가 입력하는 세자리 정수
+    #   - random_number : 문자열값으로 컴퓨터가 자동으로 생성된 숫자
+    # Output:
+    #   - [strikes, ball] : 규칙에 따라 정수형 값인 strikes와 ball이 반환됨
+    #   변환 규칙은 아래와 같음
+    #   - 사용자가 입력한 숫자와 컴퓨터가 생성한 숫자의
+    #     한 숫자와 자릿수가 모두 일치하면 1 Strike
+    #   - 자릿수는 다르나 입력한 한 숫자가 존재하면 1 Ball
+    #   - 세자리 숫자를 정확히 입력하면 3 Strike
+    # Examples:
+    #   >>> import baseball_game as bg
+    #   >>> bg.get_strikes_or_ball("123", "472")
+    #   [0, 1]
+    #   >>> bg.get_strikes_or_ball("547", "472")
+    #   [0, 2]
+    #   >>> bg.get_strikes_or_ball("247", "472")
+    #   [0, 3]
+    #   >>> bg.get_strikes_or_ball("742", "472")
+    #   [1, 2]
+    #   >>> bg.get_strikes_or_ball("472", "472")
+    #   [3, 0]
+    # '''
+    # ===Modify codes below=============
+    # 조건에 따라 변환되어야 할 결과를 result 변수에 할당
 
-def solution(command, buttons, scores):
-    answer = []
-    sum_score = 0
-    answer.append(len(command))
-    for i in list(permutations(buttons,len(buttons))): # 순열   
-        tmp_command = command
-        for j in i:
-            if j in tmp_command:
-                sum_score += scores[buttons.index(j)]
-                tmp_command = tmp_command.replace(j,'')
-        sum_score += len(tmp_command)
-        answer.append(sum_score)
-        sum_score = 0
-    return max(answer)
+    result = [0, 0]
+    for char in user_input_number:
+        if char in random_number:
+            result[1] += 1
+            if user_input_number.find(char) == random_number.find(char):
+                result[1] -= 1
+                result[0] += 1
+    # ==================================
+    return result
 
-def solution2(command, buttons, scores):
-    answer = []
-    sum_score = 0
-    answer.append(len(command))
-    def perm(list, n): # 재귀로 순열 구현
-        permutations = []
-        if n == 1:
-            for i in list:
-                permutations.append([i])
-        for i in range(len(list)):
-            next_list = [i for i in list]
-            next_list.remove(list[i])
-            for p in perm(next_list, n-1):
-                permutations.append([list[i]] + p)
-        return permutations
-    
-    for i in perm(buttons,len(buttons)):    
-        tmp_command = command
-        for j in i:
-            if j in tmp_command:
-                sum_score += scores[buttons.index(j)]
-                tmp_command = tmp_command.replace(j,'')
-        sum_score += len(tmp_command)
-        answer.append(sum_score)
-        sum_score = 0
-    return max(answer)
-
-#command = "ABCXYZ"
-#buttons = ["BCXY"]
-#scores = [2] #6
-#command = "ABCXYZ"
-#buttons = ["AB","CX","YZ"]
-#scores = [4,4,4] # 12
-command = "ABCXYZ"
-buttons = ["ABC","CXY","YZ"]
-scores = [4,5,4] # 9
-#command = "<v>AB^CYv^XAZ"
-#buttons = ["v>AB^CYv^XA", "<v>A", "^XAZ", "Yv^XA", ">AB^"]
-#scores = [50,18,20,30,25] # 59
-
-print(solution(command, buttons, scores))
-print(solution2(command, buttons, scores))
-
-
-'''
-def solution(command, buttons, scores):
-    answer = []
-    sum_score = 0
-    
-    def search(command, buttons, sum_score):
-        tmp_command = command[:]
-        tmp_buttons = buttons[:]        
-        if not tmp_buttons:
-            sum_score += len(command)
-            answer.append(sum_score)
-            sum_score = 0
-            return
-        for i in range(len(tmp_buttons)):
-            if tmp_buttons[i] in tmp_command:
-                sum_score += scores[buttons.index(tmp_buttons[i])]
-                tmp_command = tmp_command.replace(tmp_buttons[i],'')
-            tmp_buttons.pop(i)
-            print(tmp_buttons)
-            search(tmp_command, tmp_buttons, sum_score)
-
-    search(command, buttons, sum_score)
-    return answer
-
-#command = "ABCXYZ"
-#buttons = ["BCXY"]
-#scores = [2]
-command = "<v>AB^CYv^XAZ"
-buttons = ["v>AB^CYv^XA", "<v>A", "^XAZ", "Yv^XA", ">AB^"]
-scores = [50,18,20,30,25]
-print(solution(command, buttons, scores))
-'''
-
-
-
-
-'''
-def solution(command, buttons, scores):    
-    answer = 0    
-    priority = []
-    
-    for i in range(len(buttons)): # 스킬의 단위 길이당 점수
-        priority.append([scores[i]/len(buttons[i]),i])
-    priority.sort(reverse=True) # 내림차순 정렬
-    
-    for i in range(len(buttons)):
-        # 단위 길이당 점수가 1보다 높고, 커맨드에 존재한다면
-        if priority[i][0] > 1 and buttons[priority[i][1]] in command: 
-            answer += scores[priority[i][1]] # 점수 추가
-            command = command.replace(buttons[priority[i][1]],'') # 커맨드에서 삭제
-            
-    answer += len(command) # 남은 커맨드 점수로 환산
-    return answer
-'''
-'''
-    def solution(command, buttons, scores):    
-    for i in range(len(scores)):
-        if scores[i] < len(buttons[i]):
-            scores[i] = len(buttons[i])
-    
-    score_list = []
-    selected = []
-    
-    tmp = command
-    for i in range(len(buttons)):
-        command = tmp
-        if buttons[i] in command:
-            command = command.replace(buttons[i],'')
-            tmp2 = command
-            for j in range(0, len(buttons)):
-                command = tmp2
-                if buttons[j] in command:
-                    command = command.replace(buttons[j],'')
-                    score_list.append(scores[i] + scores[j] + len(command))
-                    selected.append(buttons[i] + buttons[j] + '' + command)
-                else:
-                    score_list.append(scores[i] + len(tmp2))
-                    selected.append(buttons[i])
-    
-    if not selected:
-        return len(tmp)
-    else:
-        return max(score)
-'''
+print(get_strikes_or_ball("123", "472"))
+print(get_strikes_or_ball("547", "472"))
+print(get_strikes_or_ball("247", "472"))
+print(get_strikes_or_ball("742", "472"))
+print(get_strikes_or_ball("472", "472"))
