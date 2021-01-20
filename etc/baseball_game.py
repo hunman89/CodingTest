@@ -213,8 +213,10 @@ def is_yes(one_more_input):
     # '''
     # ===Modify codes below=============
     # 조건에 따라 변환되어야 할 결과를 result 변수에 할당
-
-    result = None
+    input = one_more_input.lower()
+    result = False
+    if input == 'y' or input == 'yes':
+        result = True
     # ==================================
     return result
 
@@ -245,8 +247,10 @@ def is_no(one_more_input):
     # '''
     # ===Modify codes below=============
     # 조건에 따라 변환되어야 할 결과를 result 변수에 할당
-
-    result = None
+    input = one_more_input.lower()
+    result = False
+    if input == 'n' or input == 'no':
+        result = True
     # ==================================
     return result
 
@@ -259,10 +263,10 @@ def main():
     # ===Modify codes below=============
     # 위의 코드를 포함하여 자유로운 수정이 가능함
 
-
-    # ==================================
-    print("Thank you for using this program")
-    print("End of the Game")
+    if is_no(user_input):
+        # ==================================
+        print("Thank you for using this program")
+        print("End of the Game")
 
 if __name__ == "__main__":
     main()
