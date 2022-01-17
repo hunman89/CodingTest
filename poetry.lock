@@ -1,10 +1,10 @@
 [[package]]
-category = "main"
-description = "Rolling backport of unittest.mock for all Pythons"
 name = "mock"
+version = "4.0.3"
+description = "Rolling backport of unittest.mock for all Pythons"
+category = "main"
 optional = false
 python-versions = ">=3.6"
-version = "4.0.3"
 
 [package.extras]
 build = ["twine", "wheel", "blurb"]
@@ -12,8 +12,9 @@ docs = ["sphinx"]
 test = ["pytest (<5.4)", "pytest-cov"]
 
 [metadata]
-content-hash = "bcb6f4e881cfe564f5ecf0e46349e4c5fc786550adaeaef2d0b940814f3e3a3e"
+lock-version = "1.1"
 python-versions = "^3.8"
+content-hash = "bcb6f4e881cfe564f5ecf0e46349e4c5fc786550adaeaef2d0b940814f3e3a3e"
 
 [metadata.files]
 mock = [
