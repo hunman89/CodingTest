@@ -1,12 +1,14 @@
-from typing import List
+class FunEvent:
+    def __init__(self, tags, year):
+        self.tags = tags
+        self.year = year
+    
+    def __str__(self):
+        return f"FunEvent(tags={self.tags}, year={self.year})"
 
-def maxSubArray(nums: List[int]):
-    dp = [[0]*len(nums) for i in range(2)]
-    dp[0][0], dp[1][0] = nums[0], nums[0]
-    for i in range(1, len(nums)):
-        dp[1][i] = max(nums[i], nums[i] + dp[1][i-1])
-        dp[0][i] = max(dp[0][i-1], dp[1][i])
-    return dp[0][-1]
-
-tk = [-2,1,-3,4,-1,2,1,-5,4]
-print(maxSubArray(tk))
+tags = ["google", "ml"]
+year = 2022
+bootcamp = FunEvent(tags, year)
+tags.append("bootcamp")
+year = 2023
+print(bootcamp)
