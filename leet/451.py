@@ -3,3 +3,5 @@ class Solution:
         sort_dic = sorted(Counter(s).items(), key= lambda item: item[1], reverse=True)
         answer = [char*time for char, time in sort_dic]
         return ''.join(answer)
+
+#         return ''.join([char*time for char, time in Counter(s).most_common()])
