@@ -15,3 +15,17 @@ def dailyTemperatures(T):
   return answer
 
 print(dailyTemperatures(T))
+
+
+class Solution:
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        n = len(temperatures)
+        answer = [0] * n
+        stack = []
+        for i in range(n):
+            next_t = temperatures[i]
+            while len(stack) > 0 and stack[-1][-1] < next_t:
+                index, value = stack.pop()
+                answer[index] = i - index
+            stack.append((i,temperatures[i]))
+        return answer
